@@ -1,6 +1,95 @@
-node_modules
-dist
+# =========================
+# Root Project (hackathon-jkn)
+# =========================
+
+# Package managers
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+out/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS generated files
 .DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+Thumbs.db
+
+# Editor / Tooling
+.vscode/
+.idea/
+.cursor/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==================================
+# LandingPage (client + server)
+# ==================================
+LandingPage/node_modules/
+LandingPage/dist/
+LandingPage/build/
+LandingPage/server/public/
+LandingPage/.env
+LandingPage/.vercel/
+LandingPage/.output/
+LandingPage/vite.config.ts.*
+LandingPage/*.tar.gz
+
+# ==================================
+# Admin Panel
+# ==================================
+admin-panel/node_modules/
+admin-panel/dist/
+admin-panel/dist-ssr/
+admin-panel/build/
+admin-panel/.env
+admin-panel/.vercel/
+admin-panel/.output/
+admin-panel/stats.html
+admin-panel/*.local
+
+# ==================================
+# Back-End (Laravel)
+# ==================================
+back-end/vendor/
+back-end/node_modules/
+back-end/storage/
+back-end/bootstrap/cache/
+back-end/.env
+back-end/.env.*
+back-end/public/storage
+back-end/.phpunit.result.cache
+back-end/homestead.yaml
+back-end/Homestead.yaml
+back-end/.vagrant/
+back-end/phpunit.xml
+back-end/.idea/
+
+# ==================================
+# Front-End (if separate Vite/React)
+# ==================================
+front-end/node_modules/
+front-end/dist/
+front-end/build/
+front-end/.env
+front-end/.vercel/
+front-end/.output/
