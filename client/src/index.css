@@ -233,6 +233,25 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}
+
+
+
 @layer base {
   * {
     @apply border-border;
@@ -263,7 +282,8 @@
  * Even without handling focused or not, this is six possible combinations that
  * need to be distinguished from eachother visually.
  */
-@layer utilities {
+
+ @layer utilities {
 
   /* Hide ugly search cancel button in Chrome until we can style it properly */
   input[type="search"]::-webkit-search-cancel-button {

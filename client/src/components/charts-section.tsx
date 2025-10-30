@@ -2,38 +2,40 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { TrendingUp, Users, Calendar } from "lucide-react";
-
-const registrationData = [
-  { month: "Jan", traditional: 45, digital: 85 },
-  { month: "Feb", traditional: 42, digital: 88 },
-  { month: "Mar", traditional: 40, digital: 92 },
-  { month: "Apr", traditional: 38, digital: 94 },
-  { month: "May", traditional: 35, digital: 96 },
-  { month: "Jun", traditional: 32, digital: 98 },
-];
-
-const userGrowthData = [
-  { month: "Jan", users: 250000 },
-  { month: "Feb", users: 420000 },
-  { month: "Mar", users: 620000 },
-  { month: "Apr", users: 780000 },
-  { month: "May", users: 900000 },
-  { month: "Jun", users: 1000000 },
-];
-
-const satisfactionData = [
-  { category: "Ease of Use", score: 98 },
-  { category: "Speed", score: 96 },
-  { category: "Accessibility", score: 99 },
-  { category: "Support", score: 97 },
-  { category: "Overall", score: 99 },
-];
+import { useTranslation } from "react-i18next";
 
 export function ChartsSection() {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const registrationData = [
+    { month: "Jan", traditional: 45, digital: 85 },
+    { month: "Feb", traditional: 42, digital: 88 },
+    { month: "Mar", traditional: 40, digital: 92 },
+    { month: "Apr", traditional: 38, digital: 94 },
+    { month: "May", traditional: 35, digital: 96 },
+    { month: "Jun", traditional: 32, digital: 98 },
+  ];
+
+  const userGrowthData = [
+    { month: "Jan", users: 250000 },
+    { month: "Feb", users: 420000 },
+    { month: "Mar", users: 620000 },
+    { month: "Apr", users: 780000 },
+    { month: "May", users: 900000 },
+    { month: "Jun", users: 1000000 },
+  ];
+
+  const satisfactionData = [
+    { category: t("charts.easeOfUse"), score: 98 },
+    { category: t("charts.speed"), score: 96 },
+    { category: t("charts.accessibility"), score: 99 },
+    { category: t("charts.support"), score: 97 },
+    { category: t("charts.overall"), score: 99 },
+  ];
 
   return (
     <section id="charts" ref={ref} className="py-20 sm:py-24 lg:py-32 bg-muted/30">
@@ -46,13 +48,13 @@ export function ChartsSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-4">
             <TrendingUp className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Data Insights</span>
+            <span className="text-sm font-medium text-primary">{t("charts.badge")}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Innovation Impact Metrics
+            {t("charts.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Real-time data visualization showing the transformative impact of our digital healthcare system
+            {t("charts.subtitle")}
           </p>
         </motion.div>
 
@@ -62,17 +64,15 @@ export function ChartsSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="h-full border-card-border" data-testid="card-chart-registration">
+            <Card className="h-full border-card-border">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Calendar className="h-5 w-5 text-primary" />
                   </div>
-                  <span>Registration Efficiency Comparison</span>
+                  <span>{t("charts.registrationTitle")}</span>
                 </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Digital vs Traditional registration success rates over 6 months
-                </p>
+                <p className="text-sm text-muted-foreground">{t("charts.registrationDesc")}</p>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -88,8 +88,8 @@ export function ChartsSection() {
                       }}
                     />
                     <Legend />
-                    <Bar dataKey="traditional" fill="hsl(var(--muted))" name="Traditional" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="digital" fill="hsl(var(--primary))" name="Digital System" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="traditional" fill="hsl(var(--muted))" name={t("charts.traditional")} radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="digital" fill="hsl(var(--primary))" name={t("charts.digital")} radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -101,17 +101,15 @@ export function ChartsSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="h-full border-card-border" data-testid="card-chart-growth">
+            <Card className="h-full border-card-border">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
                     <Users className="h-5 w-5 text-accent-foreground" />
                   </div>
-                  <span>User Growth Trajectory</span>
+                  <span>{t("charts.growthTitle")}</span>
                 </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Active digital users reaching 1M+ milestone
-                </p>
+                <p className="text-sm text-muted-foreground">{t("charts.growthDesc")}</p>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -139,7 +137,7 @@ export function ChartsSection() {
                       stroke="hsl(var(--primary))"
                       strokeWidth={2}
                       fill="url(#colorUsers)"
-                      name="Active Users"
+                      name={t("charts.activeUsers")}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -153,17 +151,15 @@ export function ChartsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <Card className="border-card-border" data-testid="card-chart-satisfaction">
+          <Card className="border-card-border">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                   <TrendingUp className="h-5 w-5 text-primary" />
                 </div>
-                <span>User Satisfaction Breakdown</span>
+                <span>{t("charts.satisfactionTitle")}</span>
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Detailed satisfaction metrics across key service areas
-              </p>
+              <p className="text-sm text-muted-foreground">{t("charts.satisfactionDesc")}</p>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -179,7 +175,7 @@ export function ChartsSection() {
                     }}
                     formatter={(value: number) => `${value}%`}
                   />
-                  <Bar dataKey="score" fill="hsl(var(--primary))" name="Satisfaction Score (%)" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="score" fill="hsl(var(--primary))" name={t("charts.satisfactionTitle")} radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -202,14 +198,12 @@ export function ChartsSection() {
                     </svg>
                   </div>
                   <div className="text-left">
-                    <div className="text-sm font-semibold text-foreground">Live Analytics</div>
-                    <div className="text-xs text-muted-foreground">Updated in real-time</div>
+                    <div className="text-sm font-semibold text-foreground">{t("charts.liveAnalytics")}</div>
+                    <div className="text-xs text-muted-foreground">{t("charts.updatedRealtime")}</div>
                   </div>
                 </div>
                 <div className="h-px sm:h-12 w-full sm:w-px bg-border" />
-                <p className="text-sm text-muted-foreground max-w-md">
-                  All charts reflect actual system performance data collected from our digital healthcare platform
-                </p>
+                <p className="text-sm text-muted-foreground max-w-md">{t("charts.dataNote")}</p>
               </div>
             </CardContent>
           </Card>

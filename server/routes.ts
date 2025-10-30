@@ -1,43 +1,53 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertContactSchema } from "@shared/schema";
-import { fromZodError } from "zod-validation-error";
+import axios from "axios";
 
-export async function registerRoutes(app: Express): Promise<Server> {
-  app.post("/api/contact", async (req, res) => {
+export function registerRoutes(app: Express) {
+  app.get("/api/provinces", async (_req, res) => {
     try {
-      const validatedData = insertContactSchema.parse(req.body);
-      const contact = await storage.createContact(validatedData);
-      res.json({ success: true, contact });
-    } catch (error: any) {
-      if (error.name === "ZodError") {
-        const validationError = fromZodError(error);
-        return res.status(400).json({
-          success: false,
-          error: validationError.message,
-        });
-      }
-      res.status(500).json({
-        success: false,
-        error: "Failed to submit contact form",
-      });
+      const response = await axios.get("https://wilayah.id/api/provinces.json");
+      res.json(response.data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Failed to fetch provinces" });
     }
   });
 
-  app.get("/api/contacts", async (_req, res) => {
+  app.get("/api/regencies/:provinceCode", async (req, res) => {
+    const { provinceCode } = req.params;
     try {
-      const contacts = await storage.getAllContacts();
-      res.json({ success: true, contacts });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        error: "Failed to fetch contacts",
-      });
+      const response = await axios.get(
+        `https://wilayah.id/api/regencies/${provinceCode}.json`
+      );
+      res.json(response.data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Failed to fetch regencies" });
     }
   });
 
-  const httpServer = createServer(app);
+  app.get("/api/districts/:regencyCode", async (req, res) => {
+    const { regencyCode } = req.params;
+    try {
+      const response = await axios.get(
+        `https://wilayah.id/api/districts/${regencyCode}.json`
+      );
+      res.json(response.data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Failed to fetch districts" });
+    }
+  });
 
-  return httpServer;
+  app.get("/api/villages/:districtCode", async (req, res) => {
+    const { districtCode } = req.params;
+    try {
+      const response = await axios.get(
+        `https://wilayah.id/api/villages/${districtCode}.json`
+      );
+      res.json(response.data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, error: "Failed to fetch villages" });
+    }
+  });
 }

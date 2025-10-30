@@ -32,16 +32,45 @@ export function LanguageToggle() {
         <DropdownMenuItem
           onClick={() => changeLanguage("en")}
           data-testid="button-language-en"
-          className="cursor-pointer"
+          className="cursor-pointer flex items-center gap-2"
         >
-          <span className="mr-2">🇬🇧</span> English
+          <span className="w-5 h-3">
+            <svg
+              viewBox="0 0 60 30"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              <clipPath id="t">
+                <path d="M0 0v30h60V0z" />
+              </clipPath>
+              <g clipPath="url(#t)">
+                <path fill="#012169" d="M0 0v30h60V0z" />
+                <path fill="#FFF" d="M0 0l60 30M60 0L0 30" strokeWidth="6" />
+                <path fill="#C8102E" d="M0 0l60 30M60 0L0 30" strokeWidth="4" />
+                <path fill="#FFF" d="M25 0h10v30H25zM0 10h60v10H0z" />
+                <path fill="#C8102E" d="M27 0h6v30h-6zM0 12h60v6H0z" />
+              </g>
+            </svg>
+          </span>
+          English
         </DropdownMenuItem>
+
         <DropdownMenuItem
           onClick={() => changeLanguage("id")}
           data-testid="button-language-id"
-          className="cursor-pointer"
+          className="cursor-pointer flex items-center gap-2"
         >
-          <span className="mr-2">🇮🇩</span> Indonesian
+          <span className="w-5 h-3">
+            <svg
+              viewBox="0 0 60 30"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              <rect width="60" height="30" fill="#fff" />
+              <rect width="60" height="15" fill="#e30a17" />
+            </svg>
+          </span>
+          Indonesian
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

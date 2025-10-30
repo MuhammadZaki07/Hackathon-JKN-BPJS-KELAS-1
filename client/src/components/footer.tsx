@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const footerLinks = {
   product: [
-    { name: "Features", href: "#features" },
-    { name: "Innovation", href: "#innovation" },
-    { name: "Team", href: "#team" },
+    { name: "features", href: "#features" },
+    { name: "innovation", href: "#innovation" },
+    { name: "team", href: "#team" },
   ],
   company: [
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "about", href: "#about" },
+    { name: "contact", href: "#contact" },
   ],
   social: [
     { name: "Github", icon: Github, href: "#" },
@@ -21,6 +22,8 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const { t } = useTranslation();
+
   const scrollToSection = (href: string) => {
     if (href.startsWith("#")) {
       const element = document.querySelector(href);
@@ -42,7 +45,7 @@ export function Footer() {
             transition={{ duration: 0.5 }}
             className="space-y-4"
           >
-          <img src="/logo.png" alt="" className="sm:w-56 md:w-60 lg:w-64"/>
+            <img src="/logo.png" alt="" className="sm:w-56 md:w-60 lg:w-64" draggable="false" onContextMenu={(e) => e.preventDefault()}/>
           </motion.div>
 
           <motion.div
@@ -51,14 +54,13 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="font-semibold text-foreground mb-4">Product</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.product")}</h3>
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
                   <button
                     onClick={() => scrollToSection(link.href)}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    data-testid={`link-footer-${link.name.toLowerCase()}`}
                   >
                     {link.name}
                   </button>
@@ -73,14 +75,13 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="font-semibold text-foreground mb-4">Company</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.company")}</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <button
                     onClick={() => scrollToSection(link.href)}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    data-testid={`link-footer-${link.name.toLowerCase()}`}
                   >
                     {link.name}
                   </button>
@@ -95,7 +96,7 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="font-semibold text-foreground mb-4">Connect</h3>
+            <h3 className="font-semibold text-foreground mb-4">{t("footer.connect")}</h3>
             <div className="flex flex-wrap gap-2">
               {footerLinks.social.map((social) => {
                 const Icon = social.icon;
@@ -106,7 +107,6 @@ export function Footer() {
                     size="icon"
                     asChild
                     className="rounded-full"
-                    data-testid={`link-social-${social.name.toLowerCase()}`}
                   >
                     <a href={social.href} target="_blank" rel="noopener noreferrer">
                       <Icon className="h-5 w-5" />
@@ -128,11 +128,11 @@ export function Footer() {
         >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} BPJS Kesehatan Innovation Team. All rights reserved.
+              © {new Date().getFullYear()} {t("footer.copyright")}
             </p>
             <div className="flex items-center gap-2">
               <div className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full">
-                <span className="text-xs font-medium text-primary">Healthkathon 2025</span>
+                <span className="text-xs font-medium text-primary">{t("footer.badge")}</span>
               </div>
             </div>
           </div>

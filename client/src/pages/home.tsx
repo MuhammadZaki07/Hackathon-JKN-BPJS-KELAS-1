@@ -8,8 +8,22 @@ import { TeamSection } from "@/components/team-section";
 import { InnovationSection } from "@/components/innovation-section";
 import { ContactSection } from "@/components/contact-section";
 import { Footer } from "@/components/footer";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+   const [scrolled, setScrolled] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        setScrolled(containerRef.current.scrollTop > 0);
+      }
+    };
+    const el = containerRef.current;
+    el?.addEventListener("scroll", handleScroll);
+    return () => el?.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Navbar />
