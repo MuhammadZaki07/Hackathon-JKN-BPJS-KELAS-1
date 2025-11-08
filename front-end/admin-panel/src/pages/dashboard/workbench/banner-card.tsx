@@ -34,15 +34,6 @@ export default function BannerCard() {
 								The rand new User Interface with power of Shadcn/ui Components. Explore the Endless possibilities with{" "}
 								{GLOBAL_CONFIG.appName}.
 							</Text>
-
-							<Button
-								variant="outline"
-								className="w-fit bg-white text-black"
-								onClick={() => window.open("https://discord.gg/fXemAXVNDa")}
-							>
-								<Icon icon="carbon:logo-discord" size={24} />
-								<span className="ml-2 font-black">Join Discord</span>
-							</Button>
 						</div>
 					</div>
 
